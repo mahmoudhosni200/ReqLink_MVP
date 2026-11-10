@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Plus, FolderOpen, Trash2, BarChart3, GitBranch, Link2, FileText } from 'lucide-react';
+import { Plus, FolderOpen, Trash2, GitBranch, Link2, FileText } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import type { Project } from '@/types';
 
@@ -85,7 +85,7 @@ export default function DashboardPage() {
                       {project.stats && (
                         <>
                           <span className="flex items-center gap-1"><Link2 className="h-3 w-3" />{project.stats.totalTraceLinks} links</span>
-                          <span className="flex items-center gap-1"><BarChart3 className="h-3 w-3" />{Math.round(project.stats.avgConfidence * 100)}% avg confidence</span>
+                          <span className="flex items-center gap-1"><Link2 className="h-3 w-3 text-green-600" />{project.stats.acceptedLinks} accepted</span>
                         </>
                       )}
                     </div>

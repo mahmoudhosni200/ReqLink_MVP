@@ -8,8 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
-import { Search, FileText, Link2 } from 'lucide-react';
-import { formatConfidence, confidenceColor } from '@/lib/utils';
+import { Search, FileText, Link2, CheckCircle2 } from 'lucide-react';
 import type { Requirement, TraceLink } from '@/types';
 
 export default function RequirementsViewPage() {
@@ -72,22 +71,25 @@ export default function RequirementsViewPage() {
               <p className="text-sm mt-2">{selected.text}</p>
               <p className="text-xs text-muted-foreground">Source: {selected.source}</p>
               <Separator className="my-3" />
-              <h4 className="text-sm font-medium mb-2">Linked Code Artifacts</h4>
+              <h4 className="text-sm font-medium mb-2">AI-Accepted Code Artifacts</h4>
               {linksForReq(selected.id).length === 0 ? (
-                <p className="text-sm text-muted-foreground">No trace links found for this requirement.</p>
+                <p className="text-sm text-muted-foreground">No accepted trace links found for this requirement.</p>
               ) : (
                 <div className="space-y-2">
                   {linksForReq(selected.id).map(link => (
                     <div key={link.id} className="p-3 border rounded-md">
                       <div className="flex items-center justify-between mb-1">
                         <span className="font-mono text-sm font-semibold">{link.codeArtifactName}</span>
-                        <span className={`text-sm font-bold ${confidenceColor(link.confidence)}`}>{formatConfidence(link.confidence)}</span>
+                        <Badge className="bg-green-100 text-green-800 text-xs">
+                          <CheckCircle2 className="h-3 w-3 mr-1" />Accepted
+                        </Badge>
                       </div>
                       <p className="text-xs text-muted-foreground">{link.codeArtifactPath}</p>
                       <p className="text-xs mt-1">{link.explanation}</p>
-                      <div className="flex gap-2 mt-1">
-                        <Badge variant={link.decision === 'accepted' ? 'default' : link.decision === 'rejected' ? 'destructive' : 'secondary'} className="text-xs">{link.decision}</Badge>
-                        <Badge variant="outline" className="text-xs">{link.retrievalMethod === 'semantic_seed' ? 'Semantic' : 'Graph'}</Badge>
+                      <div className="mt-1">
+                        <Badge variant="outline" className="text-xs">
+                          {link.retrievalMethod === 'semantic_seed' ? '🎯 Semantic' : '🔗 Graph'}
+                        </Badge>
                       </div>
                     </div>
                   ))}

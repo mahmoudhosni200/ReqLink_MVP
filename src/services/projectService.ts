@@ -7,14 +7,14 @@ const sampleProjects: Project[] = [
     type: 'standard', codeSource: 'github', githubUrl: 'https://github.com/example/hospital-management-system',
     requirementsFileName: 'HMS_SRS.docx', language: 'java', enableExperimentalC: false, status: 'completed',
     createdAt: '2024-11-07T08:00:00Z', completedAt: '2024-11-07T08:12:00Z',
-    stats: { totalRequirements: 12, totalCodeArtifacts: 20, totalTraceLinks: 25, acceptedLinks: 20, rejectedLinks: 3, avgConfidence: 0.84 },
+    stats: { totalRequirements: 12, totalCodeArtifacts: 20, totalTraceLinks: 20, acceptedLinks: 20 },
   },
   {
     id: 'proj-bench-1', name: 'eTour Benchmark', description: 'Benchmark evaluation on the eTour dataset comparing ReqLink configurations A–D against gold-standard trace links.',
     type: 'benchmark', codeSource: 'upload', benchmarkDataset: 'eTour',
     requirementsFileName: 'eTour_requirements.txt', language: 'java', enableExperimentalC: false, status: 'completed',
     createdAt: '2024-11-06T10:00:00Z', completedAt: '2024-11-06T10:25:00Z',
-    stats: { totalRequirements: 8, totalCodeArtifacts: 5, totalTraceLinks: 12, acceptedLinks: 10, rejectedLinks: 2, avgConfidence: 0.78 },
+    stats: { totalRequirements: 8, totalCodeArtifacts: 5, totalTraceLinks: 9, acceptedLinks: 9 },
   },
 ];
 

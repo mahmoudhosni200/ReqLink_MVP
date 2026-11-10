@@ -48,14 +48,12 @@ export default function ProjectResultsPage() {
 
       {/* Stats cards */}
       {stats && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
           {[
             { label: 'Requirements', value: stats.totalRequirements, icon: FileText },
             { label: 'Code Artifacts', value: stats.totalCodeArtifacts, icon: Code2 },
             { label: 'Trace Links', value: stats.totalTraceLinks, icon: Link2 },
-            { label: 'Accepted', value: stats.acceptedLinks, icon: Link2 },
-            { label: 'Rejected', value: stats.rejectedLinks, icon: Link2 },
-            { label: 'Avg Confidence', value: `${Math.round(stats.avgConfidence * 100)}%`, icon: BarChart3 },
+            { label: 'AI Accepted', value: stats.acceptedLinks, icon: Link2 },
           ].map(({ label, value, icon: Icon }) => (
             <Card key={label}>
               <CardContent className="pt-4 pb-3 px-4">
@@ -89,7 +87,7 @@ export default function ProjectResultsPage() {
           <Link to={`/projects/${id}/trace-links`} className="block">
             <Card className="h-full hover:shadow-md transition-shadow">
               <CardHeader><CardTitle className="text-base flex items-center gap-2"><Link2 className="h-4 w-4 text-primary" /> Trace Links</CardTitle></CardHeader>
-              <CardContent><p className="text-sm text-muted-foreground">Explore {stats?.totalTraceLinks} discovered requirement-to-code trace links with confidence scores and explanations.</p></CardContent>
+              <CardContent><p className="text-sm text-muted-foreground">Explore {stats?.totalTraceLinks} AI-verified requirement-to-code trace links with explanations.</p></CardContent>
             </Card>
           </Link>
           <Link to={`/projects/${id}/graph`} className="block">

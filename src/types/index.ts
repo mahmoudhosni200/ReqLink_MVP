@@ -4,7 +4,7 @@ export type ProjectType = 'standard' | 'benchmark';
 export type CodeSourceType = 'github' | 'upload';
 export type ProjectStatus = 'created' | 'analyzing' | 'completed' | 'error';
 export type AnalysisStageStatus = 'pending' | 'running' | 'completed' | 'error';
-export type TraceLinkDecision = 'accepted' | 'rejected' | 'pending';
+export type TraceLinkDecision = 'accepted' | 'rejected';
 export type CodeArtifactType = 'method' | 'class' | 'package';
 export type DependencyType = 'call' | 'inheritance' | 'interface' | 'import' | 'field_type';
 export type PRStatus = 'open' | 'merged' | 'closed';
@@ -38,8 +38,6 @@ export interface ProjectStats {
   totalCodeArtifacts: number;
   totalTraceLinks: number;
   acceptedLinks: number;
-  rejectedLinks: number;
-  avgConfidence: number;
 }
 
 export interface Requirement {
@@ -77,7 +75,6 @@ export interface TraceLink {
   codeArtifactType: CodeArtifactType;
   codeArtifactPath: string;
   decision: TraceLinkDecision;
-  confidence: number;
   explanation: string;
   retrievalMethod: 'semantic_seed' | 'graph_expansion';
   verifiedAt: string;
@@ -195,10 +192,7 @@ export interface CreateProjectData {
 
 export interface TraceLinkFilterParams {
   search?: string;
-  decision?: TraceLinkDecision | 'all';
-  confidenceMin?: number;
-  confidenceMax?: number;
   retrievalMethod?: 'semantic_seed' | 'graph_expansion' | 'all';
-  sortBy?: 'confidence' | 'requirement' | 'artifact' | 'decision';
+  sortBy?: 'requirement' | 'artifact';
   sortOrder?: 'asc' | 'desc';
 }

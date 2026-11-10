@@ -46,11 +46,11 @@ function runStage(stageIndex: number): void {
       getProject(finishedPid).then(project => {
         const isBench = project?.type === 'benchmark';
         updateProjectStatus(finishedPid, 'completed', isBench ? {
-          totalRequirements: 8, totalCodeArtifacts: 5, totalTraceLinks: 12,
-          acceptedLinks: 10, rejectedLinks: 2, avgConfidence: 0.78,
+          totalRequirements: 8, totalCodeArtifacts: 5, totalTraceLinks: 9,
+          acceptedLinks: 9,
         } : {
-          totalRequirements: 12, totalCodeArtifacts: 20, totalTraceLinks: 25,
-          acceptedLinks: 20, rejectedLinks: 3, avgConfidence: 0.84,
+          totalRequirements: 12, totalCodeArtifacts: 20, totalTraceLinks: 20,
+          acceptedLinks: 20,
         });
         notify();
       });
