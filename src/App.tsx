@@ -6,7 +6,6 @@ import NewProjectPage from '@/pages/NewProjectPage';
 import AnalysisPage from '@/pages/AnalysisPage';
 import ProjectResultsPage from '@/pages/ProjectResultsPage';
 import TraceLinksPage from '@/pages/TraceLinksPage';
-import DependencyGraphPage from '@/pages/DependencyGraphPage';
 import RequirementsViewPage from '@/pages/RequirementsViewPage';
 import CodeArtifactsPage from '@/pages/CodeArtifactsPage';
 import PRMonitorPage from '@/pages/PRMonitorPage';
@@ -28,7 +27,6 @@ export default function App() {
           {/* Project results with nested tab routes */}
           <Route path="/projects/:id" element={<ProjectResultsPage />}>
             <Route path="trace-links" element={<TraceLinksPage />} />
-            <Route path="graph" element={<DependencyGraphPage />} />
             <Route path="requirements" element={<RequirementsViewPage />} />
             <Route path="code" element={<CodeArtifactsPage />} />
             <Route path="pull-requests" element={<PRMonitorPage />} />

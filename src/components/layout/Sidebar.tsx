@@ -8,7 +8,6 @@ import {
   Link2,
   FileText,
   Code2,
-  Network,
   BarChart3,
   GitPullRequest,
   CheckCircle2
@@ -61,7 +60,6 @@ export default function Sidebar() {
             {[
               { to: `/projects/${activeProjectId}`, label: 'Overview', icon: LayoutDashboard, exact: true },
               { to: `/projects/${activeProjectId}/trace-links`, label: 'Trace Links', icon: Link2 },
-              { to: `/projects/${activeProjectId}/graph`, label: 'Dependency Graph', icon: Network },
               { to: `/projects/${activeProjectId}/requirements`, label: 'Requirements', icon: FileText },
               { to: `/projects/${activeProjectId}/code`, label: 'Code Artifacts', icon: Code2 },
               ...(currentProject.codeSource === 'github' ? [

@@ -30,9 +30,7 @@ Maintaining accurate requirement-to-code traceability is a critical but notoriou
 | **Dashboard** | View project portfolio, global metrics, project status badges, and open projects or create new ones. | **Fully Implemented** (State persisted in `localStorage`) |
 | **Project Creation Wizard** | 4-step wizard to create a **Standard Project**: configure metadata, upload requirements (`.docx`, `.pdf`, `.txt`), provide GitHub URL or upload ZIP archives, and review settings. | **Fully Implemented** (Real client-side `.txt` file reading + simulated binary preview + interactive ZIP tree) |
 | **Analysis Pipeline** | Watch a simulated 7-stage animated progress pipeline with live percentages, sub-details, and restart capabilities. | **Simulated** (Timer-driven reactive observer pattern; no actual backend AI) |
-| **Trace Links Table** | Search, filter by decision (`accepted`, `rejected`, `pending`) and retrieval origin (`semantic_seed`, `graph_expansion`), sort by confidence, and review LLM justifications. | **Fully Implemented UI** (Powered by predefined mock trace links with persistent user decisions) |
-| **Accept / Reject Review** | Accept or reject suggested trace links inline or inside the detail modal. Decisions instantly persist across page refreshes. | **Fully Implemented** (`localStorage` persistence) |
-| **Interactive Dependency Graph** | Pan, zoom, and inspect a code dependency graph powered by React Flow with 5 edge types (`call`, `inheritance`, `interface`, `import`, `field_type`) and a node inspector drawer. | **Fully Implemented UI** (Interactive canvas over predefined Java AST topology) |
+| **Trace Links Table** | Browse AI-accepted trace links, search, filter by retrieval origin (`semantic_seed`, `graph_expansion`), sort by requirement or artifact, and review AI explanations. | **Fully Implemented UI** (Displays AI-verified accepted links with explanations) |
 | **Requirements Explorer** | Browse functional requirements with unique IDs (`FR-01`), full texts, source citations, and linked code artifact counts. | **Fully Implemented** (Predefined mock requirements) |
 | **Code Artifacts Explorer** | Explore parsed Java classes, methods, and packages with line numbers and LLM-generated summaries. | **Fully Implemented** (Predefined mock code artifacts) |
 | **Pull Request Monitor** | Inspect pull request diffs (`+`/`-`), affected methods, impact analysis, and automated ReqLink bot comments. *(Available for GitHub projects)* | **Fully Implemented UI** (Predefined mock PR diffs & bot comments) |
@@ -48,7 +46,6 @@ Maintaining accurate requirement-to-code traceability is a critical but notoriou
 * **Styling:** [Tailwind CSS](https://tailwindcss.com/) (`3.4.15`) with `tailwindcss-animate`
 * **UI Components:** [shadcn/ui](https://ui.shadcn.com/) primitives built on [Radix UI](https://www.radix-ui.com/)
 * **State Management:** [Zustand](https://github.com/pmndrs/zustand) (`4.5.5`) with local persistence middleware
-* **Graph Visualization:** [@xyflow/react](https://reactflow.dev/) (`12.3.6`) (React Flow)
 * **Charts:** [Recharts](https://recharts.org/) (`2.13.3`)
 * **Icons:** [Lucide React](https://lucide.dev/) (`0.460.0`)
 * **Notifications:** [Sonner](https://sonner.emilkowal.ski/) (`1.7.0`)
@@ -193,7 +190,6 @@ ReqLink_MVP/
 │       ├── AnalysisPage.tsx     # 7-stage animated analysis simulation
 │       ├── ProjectResultsPage.tsx # Results shell with stats and navigation tabs
 │       ├── TraceLinksPage.tsx   # Traceability links table with search, filters, modal
-│       ├── DependencyGraphPage.tsx # Interactive React Flow code graph
 │       ├── RequirementsViewPage.tsx # Requirements explorer with code mappings
 │       ├── CodeArtifactsPage.tsx# Code units explorer with summaries
 │       ├── PRMonitorPage.tsx    # GitHub PR monitor and bot comments (GitHub only)
@@ -247,13 +243,9 @@ Here is the standard user journey through the application:
 3. Project Results (/projects/proj-1)
    ├── Trace Links Tab
    │   ├── Search for "auth"
-   │   ├── Filter by "accepted" or "rejected"
-   │   ├── Sort by Confidence
-   │   ├── Click row to inspect LLM explanation
-   │   └── Click "Accept" or "Reject" (persists on page refresh)
-   ├── Dependency Graph Tab
-   │   ├── Pan & zoom the interactive canvas
-   │   └── Click node "AuthService" to inspect its degree & LLM summary
+   │   ├── Filter by Retrieval Method ("semantic_seed" vs "graph_expansion")
+   │   ├── Sort by Requirement or Artifact
+   │   └── Click row to inspect AI explanation
    ├── Requirements Tab
    │   └── Search requirements & inspect linked code units
    ├── Code Artifacts Tab
@@ -280,12 +272,12 @@ Here is the standard user journey through the application:
 This application is an **interactive frontend prototype (MVP)** built for evaluation and demonstration:
 
 1. **No Live Backend:** There is no Python backend, server database, or external microservice running. All data operations are handled through modular mock services located in `src/services/`.
-2. **Predefined Mock AI Data:** **The application does not call OpenAI, Anthropic, or Gemini APIs at runtime, nor does it compute vector embeddings.** All method/class summaries, candidate retrieval badges (`semantic_seed` vs. `graph_expansion`), confidence scores (e.g., 95%), and natural-language justifications are **predefined mock records** structured to illustrate the proposed backend data contract.
+2. **Predefined Mock AI Data:** **The application does not call OpenAI, Anthropic, or Gemini APIs at runtime, nor does it compute vector embeddings.** All method/class summaries, candidate retrieval badges (`semantic_seed` vs. `graph_expansion`), and natural-language justifications are **predefined mock records** structured to illustrate the proposed backend data contract.
 3. **Simulated Analysis Pipeline:** The 7-stage analysis progress screen uses timer-based intervals to realistically demonstrate the user experience without requiring backend infrastructure.
 4. **File Upload Handling:**
    * **Plain text files (`.txt`):** The browser genuinely parses lines, strips prefixes, and displays real requirements via `File.text()`.
    * **Binary files (`.docx`, `.pdf`):** Binary document parsing requires server-side NLP converters. The application displays a simulated preview labeled with a clear disclaimer badge.
-5. **Interactive Graph Topology:** The React Flow canvas is fully interactive (pan, zoom, click-to-inspect), but its node/edge structure is loaded from a representative Java AST dataset rather than dynamically compiled from uploaded archives.
+5. **Dependency Graph Architecture:** Dependency graph expansion (traversing calls, inheritance, and imports) remains an integral part of the proposed candidate retrieval pipeline; its standalone visual canvas is omitted from the MVP presentation.
 6. **Simulated GitHub CI/CD:** Pull request lists and bot comments simulate the behavior of the proposed ReqLink GitHub Action bot without connecting to the GitHub REST/GraphQL APIs.
 7. **Creation Wizard Scope:** All newly created projects are Standard Projects analyzing Java code. Benchmark evaluation mode and experimental C support are not exposed in the creation wizard.
 

@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Link2, FileText, Code2, GitBranch, BarChart3, Network } from 'lucide-react';
+import { Link2, FileText, Code2, GitBranch, BarChart3 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
 export default function ProjectResultsPage() {
@@ -26,7 +26,6 @@ export default function ProjectResultsPage() {
   // Determine active tab from path
   const pathEnd = location.pathname.split(`/projects/${id}`)[1] || '';
   const activeTab = pathEnd.startsWith('/trace-links') ? 'trace-links'
-    : pathEnd.startsWith('/graph') ? 'graph'
     : pathEnd.startsWith('/requirements') ? 'requirements'
     : pathEnd.startsWith('/code') ? 'code'
     : pathEnd.startsWith('/pull-requests') ? 'pull-requests'
@@ -73,7 +72,6 @@ export default function ProjectResultsPage() {
         <TabsList className="flex-wrap h-auto gap-1">
           <TabsTrigger value="overview" asChild><Link to={`/projects/${id}`}>Overview</Link></TabsTrigger>
           <TabsTrigger value="trace-links" asChild><Link to={`/projects/${id}/trace-links`}>Trace Links</Link></TabsTrigger>
-          <TabsTrigger value="graph" asChild><Link to={`/projects/${id}/graph`}>Dependency Graph</Link></TabsTrigger>
           <TabsTrigger value="requirements" asChild><Link to={`/projects/${id}/requirements`}>Requirements</Link></TabsTrigger>
           <TabsTrigger value="code" asChild><Link to={`/projects/${id}/code`}>Code Artifacts</Link></TabsTrigger>
           {isGithub && <TabsTrigger value="pull-requests" asChild><Link to={`/projects/${id}/pull-requests`}>PR Monitor</Link></TabsTrigger>}
@@ -88,12 +86,6 @@ export default function ProjectResultsPage() {
             <Card className="h-full hover:shadow-md transition-shadow">
               <CardHeader><CardTitle className="text-base flex items-center gap-2"><Link2 className="h-4 w-4 text-primary" /> Trace Links</CardTitle></CardHeader>
               <CardContent><p className="text-sm text-muted-foreground">Explore {stats?.totalTraceLinks} AI-verified requirement-to-code trace links with explanations.</p></CardContent>
-            </Card>
-          </Link>
-          <Link to={`/projects/${id}/graph`} className="block">
-            <Card className="h-full hover:shadow-md transition-shadow">
-              <CardHeader><CardTitle className="text-base flex items-center gap-2"><Network className="h-4 w-4 text-primary" /> Dependency Graph</CardTitle></CardHeader>
-              <CardContent><p className="text-sm text-muted-foreground">Interactive visualization of code dependencies including calls, inheritance, and imports.</p></CardContent>
             </Card>
           </Link>
           <Link to={`/projects/${id}/requirements`} className="block">

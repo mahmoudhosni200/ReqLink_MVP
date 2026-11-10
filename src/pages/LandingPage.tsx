@@ -4,9 +4,9 @@ import { ArrowRight, Link2, GitBranch, Brain, BarChart3, Zap, Shield } from 'luc
 
 const features = [
   { icon: Brain, title: 'AST-Based Code Understanding', desc: 'Parses source code into semantic units with hierarchical LLM-generated summaries.' },
-  { icon: GitBranch, title: 'Dependency Graph Analysis', desc: 'Builds and traverses call, inheritance, and import graphs to discover hidden relationships.' },
+  { icon: GitBranch, title: 'Dependency Graph Expansion', desc: 'Traverses call, inheritance, and import relationships during candidate retrieval.' },
   { icon: Zap, title: 'Smart Retrieval Pipeline', desc: 'Combines semantic seed retrieval with graph-based expansion for comprehensive candidate coverage.' },
-  { icon: Shield, title: 'LLM Verification', desc: 'Verifies each candidate trace link with confidence scores and natural-language explanations.' },
+  { icon: Shield, title: 'LLM Verification', desc: 'Verifies each candidate trace link using AI reasoning and provides natural-language explanations.' },
   { icon: BarChart3, title: 'Benchmark Evaluation', desc: 'Evaluate on standard datasets (eTour, iTrust, SMOS, eAnci) with ablation configurations.' },
   { icon: Link2, title: 'GitHub PR Integration', desc: 'Monitor pull requests, detect changes, and incrementally maintain trace links.' },
 ];
